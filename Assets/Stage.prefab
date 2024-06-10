@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2813029746244088575}
   - component: {fileID: 7284295420636557478}
   - component: {fileID: 3672470619956464569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 5005675156726307089}
   - component: {fileID: 3155809324023621816}
   - component: {fileID: 5880708677971526033}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 7271603219784819219}
   - component: {fileID: 3035502698989875296}
   - component: {fileID: 1414489578458346075}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4208142163136452199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 7548744455623901060}
   - component: {fileID: 6141210652409703202}
   - component: {fileID: 9169160016182141768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

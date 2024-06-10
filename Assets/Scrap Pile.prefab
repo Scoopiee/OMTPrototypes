@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1512917514836928661}
   - component: {fileID: 6676102238030599994}
   - component: {fileID: 5597721219784562218}
-  m_Layer: 6
+  - component: {fileID: 1149615024267246066}
+  m_Layer: 0
   m_Name: Scrap Pile
   m_TagString: ScrapPile
   m_Icon: {fileID: 0}
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.31132078, g: 0.16586673, b: 0.12482201, a: 1}
   m_FlipX: 0
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1149615024267246066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091159413233579565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d309faa791fcda945a4c1b56b0569817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  yellowCoin: {fileID: 1645213642453459477, guid: 935034762933e4a42b78853c10e81b72, type: 3}
+  shootForce: 10
+  isPlayerBehind: 0
