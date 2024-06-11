@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 16f;
     private float checkRadius = 0.3f;
     private bool isFacingRight = true;
-    private int  direction = 1;
+    private int  playerDirection = 1;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
       if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) 
       {
             isFacingRight = !isFacingRight; //Flip the boolean 
-            direction *= -1; //Flip direction (numerical representation)
+            playerDirection *= -1; //Flip direction (numerical representation)
             
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f; // Multiplies the x value of the scale component, flipping the character
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int GetDirection()
     {
-        return direction;
+        return playerDirection;
     }
 
     void OnDrawGizmos()
