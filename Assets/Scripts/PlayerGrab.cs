@@ -7,7 +7,6 @@ public class GrabObjects : MonoBehaviour
    private Camera mainCam; 
    private Vector3 mousePos;
    [SerializeField] private Transform grabPoint;
-   [SerializeField] private float grabPointDistance = 1.5f;
    [SerializeField] private Transform rayPoint;
    [SerializeField] private float rayDistance;
    [SerializeField] private GameObject grabbedObject = null;
