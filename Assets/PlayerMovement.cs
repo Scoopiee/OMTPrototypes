@@ -8,11 +8,15 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
+    private float checkRadius = 0.3f;
     private bool isFacingRight = true;
+    private int  direction = 1;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask objectsLayer;
+
     void Start()// Start is called before the first frame update
     {
       
@@ -33,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
        }
        
+       
        Flip();
     }
 
@@ -42,17 +47,34 @@ public class PlayerMovement : MonoBehaviour
    }
    private bool IsGrounded()
    {
-    return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    LayerMask combinedLayerMask = groundLayer | objectsLayer; // Combines the ground and objects layers to a single layermask to be checked.
+    return Physics2D.OverlapCircle(groundCheck.position, checkRadius, combinedLayerMask);
    }
    private void Flip() // If player character is facing the wrong way, flip the sprite
     {
       if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) 
       {
-            isFacingRight = !isFacingRight;
+            isFacingRight = !isFacingRight; //Flip the boolean 
+            direction *= -1; //Flip direction (numerical representation)
             
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f; // Multiplies the x value of the scale component, flipping the character
             transform.localScale = localScale;
       } 
     }
+
+    public int GetDirection()
+    {
+        return direction;
+    }
+
+    void OnDrawGizmos()
+    {
+    if (groundCheck != null)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+    }
+    }
 }
+
