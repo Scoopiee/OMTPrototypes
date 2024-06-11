@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 313180925712319964}
   m_Layer: 0
-  m_Name: RayPosition
+  m_Name: Ray Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061143535911363581}
   m_Layer: 0
-  m_Name: GrabPosition
+  m_Name: Grab Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
