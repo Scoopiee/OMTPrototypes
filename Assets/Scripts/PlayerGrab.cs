@@ -56,7 +56,6 @@ public class GrabObjects : MonoBehaviour
  
             // Apply force to throw the object
             Vector2 throwDirection = new Vector2(mousePos.x - grabPoint.transform.position.x, mousePos.y - grabPoint.transform.position.y).normalized; // Adjust as needed for desired throw angle
-            Debug.Log($"MousePos: {mousePos}, Grabpoint: {grabPoint.transform.position}, ThrowVector:{throwDirection}");
             float throwForce = 20f; // Adjust the force value as needed
             rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
 

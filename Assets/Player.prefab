@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 5915072806545713411}
   - component: {fileID: 6387626594410105106}
   - component: {fileID: 228811984404477150}
+  - component: {fileID: 262121573723387438}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -791,7 +792,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPoint: {fileID: 4939848604933948256}
-  grabPointDistance: 1.5
   rayPoint: {fileID: 5806814366188801326}
   rayDistance: 0.7
   grabbedObject: {fileID: 0}
+--- !u!114 &262121573723387438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027226411204167560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69edf3a00486d714eac3d7f3652e5436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHealth: 100
+  logicManager: {fileID: 4090290069846949926, guid: ab2f3a934a123b34ebe418f0c1ea486f, type: 3}
