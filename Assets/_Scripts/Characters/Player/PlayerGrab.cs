@@ -11,12 +11,11 @@ public class GrabObjects : MonoBehaviour
    [SerializeField] private float rayDistance;
    [SerializeField] private GameObject grabbedObject = null;
    private int layerIndex; 
-   private PlayerMovement playerMovement;
+   [SerializeField] private Player player;
     
     void Start() // Start is called before the first frame update
     {
         layerIndex = LayerMask.NameToLayer("Objects");
-        playerMovement = GetComponent<PlayerMovement>();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         
     }
@@ -26,7 +25,7 @@ public class GrabObjects : MonoBehaviour
     {
          mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         
-        int playerDirection = playerMovement.GetDirection();
+        int playerDirection = player.movementDirection;
         
         RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, Vector2.right * playerDirection, rayDistance);
 

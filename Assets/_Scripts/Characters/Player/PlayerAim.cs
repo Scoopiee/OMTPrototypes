@@ -6,7 +6,7 @@ public class Aim : MonoBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
-    public Player Player;
+    public Player player;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +16,7 @@ public class Aim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int playerDirection = Player.movementDirection;
+        int playerDirection = player.movementDirection;
         
         
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);

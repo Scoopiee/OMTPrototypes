@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b185bfaa093c44ea635f71a33f749a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
+  player: {fileID: 6239212029811312314}
 --- !u!1 &3474804751771811558
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,11 +772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d18b01851fa1bf45bcc6b222584bb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canDash: 1
-  isDashing: 0
-  dashingPower: 24
-  dashingTime: 0.2
-  dashingCooldown: 1
   rb: {fileID: 2956579955566544200}
   groundCheck: {fileID: 4454433508223227632}
   groundLayer:
@@ -785,6 +780,7 @@ MonoBehaviour:
   objectsLayer:
     serializedVersion: 2
     m_Bits: 256
+  player: {fileID: 6239212029811312314}
 --- !u!114 &228811984404477150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +797,7 @@ MonoBehaviour:
   rayPoint: {fileID: 5806814366188801326}
   rayDistance: 0.7
   grabbedObject: {fileID: 0}
+  player: {fileID: 6239212029811312314}
 --- !u!114 &6239212029811312314
 MonoBehaviour:
   m_ObjectHideFlags: 0
