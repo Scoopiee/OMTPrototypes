@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-   [SerializeField] private float horizontal;
+    private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
     private float checkRadius = 0.3f;
     private bool isFacingRight = true;
-    private int  playerDirection = 1;
 
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool isDashing;
-    [SerializeField] private float dashingPower = 24f;
+    [SerializeField]private bool canDash = true;
+    [SerializeField]private bool isDashing;
+    [SerializeField]private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
 
@@ -22,9 +21,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask objectsLayer;
-    [SerializeField] private Player player;
+    
+    Player player;
 
     // Update is called once per frame
+    void Start()
+    {
+        player = GetComponent<Player>();
+    }
+    
     void Update()
     {
        if (isDashing)
@@ -32,19 +37,8 @@ public class PlayerMovement : MonoBehaviour
         return;
        }
 
-       horizontal = Input.GetAxis("Horizontal"); //Returns value of -1,- +1, depending on direction moving.
+       horizontal = Input.GetAxis("Horizontal"); //Returns value of -1, 0, +1, depending on direction moving.
        
-       if (horizontal > 0)
-       {
-        player.movementDirection = 1;
-       }
-       else if (horizontal < 0)
-       {
-        player.movementDirection = -1;
-       }
-
-        Debug.Log($"Moving: {player.movementDirection}");
-
        if (Input.GetButtonDown("Jump") && IsGrounded())
        {
             rb.velocity= new Vector2(rb.velocity.x, jumpingPower);
@@ -59,8 +53,7 @@ public class PlayerMovement : MonoBehaviour
        {
             StartCoroutine(Dash());
        }
-        
-       player.Flip();
+       Flip();
     }
 
     private void FixedUpdate() // Fixed interval updates for physics calculations
@@ -84,27 +77,14 @@ public class PlayerMovement : MonoBehaviour
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) 
         {
             isFacingRight = !isFacingRight; //Flip the boolean 
-            playerDirection *= -1; //Flip direction (numerical representation)
+            player.movementDirection *= -1; //Flip direction (numerical representation)
                 
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f; // Multiplies the x value of the scale component, flipping the character
             transform.localScale = localScale;
         } 
     }
-
-    public int GetDirection()
-    {
-        return playerDirection;
-    }
-
-    void OnDrawGizmos()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
-        }
-    }
+    
     
     private IEnumerator Dash()
     {
@@ -122,3 +102,4 @@ public class PlayerMovement : MonoBehaviour
     }
     
 }
+

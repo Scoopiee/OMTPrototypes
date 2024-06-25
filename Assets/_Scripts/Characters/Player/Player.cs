@@ -6,19 +6,13 @@ public class Player : Character
 {
     private SpriteRenderer spriteRenderer;
     private bool isInvisible = false;
-
+   
     void Awake()
     {
-        health = 120;
+        health = 100;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    [ContextMenu("Test Damage Function")]
-    private void TestTakeDamage()
-    {
-        TakeDamage(20);
-    }
-
+   
     public void SetInvisible(bool isInvisible)
     {
         Debug.Log($"Setting invisibility to {isInvisible}");
@@ -34,4 +28,5 @@ public class Player : Character
     {
         return isInvisible;
     }
+
 }

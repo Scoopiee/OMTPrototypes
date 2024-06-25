@@ -11,9 +11,9 @@ public class MovementRework : MonoBehaviour
     private float checkRadius = 0.3f;
     private bool isFacingRight = true;
 
-    [SerializeField]private bool canDash = true;
-    [SerializeField]private bool isDashing;
-    [SerializeField]private float dashingPower = 24f;
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool isDashing;
+    [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
 

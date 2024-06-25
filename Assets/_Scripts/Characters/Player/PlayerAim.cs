@@ -6,18 +6,17 @@ public class Aim : MonoBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
-    public PlayerMovement playerMovement;
+    public Player Player;
     // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int playerDirection = playerMovement.GetDirection();
+        int playerDirection = Player.movementDirection;
         
         
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
