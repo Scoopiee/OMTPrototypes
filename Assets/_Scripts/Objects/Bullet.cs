@@ -3,8 +3,8 @@
 *
 * Contains logic for bullet object, such as damage, collision logic, and  
 *
-* Created by: <Full Name> 
-* Date: <dd/mm/yy>
+* Created by: <Aidan McCarthy> 
+* Date: <16/06/2024>
 *
 ***************************************************************************************************************/
 using UnityEngine;
