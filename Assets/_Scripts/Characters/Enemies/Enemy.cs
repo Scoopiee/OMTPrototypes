@@ -1,82 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
 {
-    public float approachSpeed = 3f;
-    public float detectionRadius = 10f; // Radius within which the enemy detects the player
-    public float stopDistance = 2f; // Distance at which the enemy stops approaching the player
-    public GameObject bulletPrefab; // Reference to the bullet prefab
-    public float shootCooldown = 2f; // Time between shots
-    public float bulletSpawnOffset = 1f; // Distance in front of the enemy to spawn bullets
+    public float enemySpeed; 
+    public float detectionRadius; // Radius within which the enemy detects the player
+    public float stopDistance;
+    public float attackRadius;
+    public float attackCooldown;
+    private float lastAttackTime = -Mathf.Infinity; // Time when the last attack occurred
 
-    private Transform playerTransform;
-    private float lastShotTime;
-    private Player player;
-
-    void Start()
+    public float distanceToPlayer;
+    public Vector2 directionToPlayer;
+    public GameObject playerCharacter;
+    public Player player;
+    public Transform playerTransform;
+    
+    public virtual void FindPlayer()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        player = playerTransform.GetComponent<Player>();
-        lastShotTime = -shootCooldown; // Allow shooting immediately on start
+         if (playerTransform == null || player.GetInvisibilityStatus())
+    {
+        return; // Do not approach or target the player if they are invisible or don't exist
     }
-
-    void Update()
+    else
     {
-        ApproachAndShootPlayer();
+        Vector3 enemyPosition = transform.position;
+        Vector3 playerPosition = playerTransform.position;
+
+        distanceToPlayer = Vector2.Distance(enemyPosition, playerPosition);
+        directionToPlayer = (playerPosition - enemyPosition).normalized;
     }
-
-    private void ApproachAndShootPlayer()
+        
+    }
+    public virtual void ApproachPlayer()
     {
-        if (playerTransform == null || player.GetInvisibilityStatus())
+        if (distanceToPlayer < detectionRadius && distanceToPlayer > stopDistance)
         {
-            return; // Do not approach or target the player if they are invisible
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, enemySpeed * Time.deltaTime);
         }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer < detectionRadius)
+        
+        if (directionToPlayer.x > 0)
         {
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
-
-            // Move towards the player if outside the stop distance
-            if (distanceToPlayer > stopDistance)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, approachSpeed * Time.deltaTime);
-            }
-
-            // Update movementDirection for flipping
-            if (direction.x > 0)
-            {
-                movementDirection = 1;
-            }
-            else if (direction.x < 0)
-            {
-                movementDirection = -1;
-            }
-            Flip();
-
-            // Shoot at the player if within detection radius
-            ShootAtPlayer(direction);
+            movementDirection = 1;
         }
+        else if (directionToPlayer.x < 0)
+        {
+            movementDirection = -1;
+        }
+        Flip();
     }
 
-    private void ShootAtPlayer(Vector2 direction)
+     public virtual void Attack()
     {
-        if (Time.time - lastShotTime < shootCooldown)
+        
+        if (Time.time - lastAttackTime >= attackCooldown) // Check if the attack is within cooldown period
         {
-            return;
+            if (distanceToPlayer < attackRadius)
+            {
+                player.TakeDamage(1);
+                lastAttackTime = Time.time; // Reset the cooldown timer
+            }
         }
-
-        lastShotTime = Time.time;
-
-        // Calculate bullet spawn position with offset
-        Vector3 bulletSpawnPosition = transform.position + (Vector3.right * movementDirection * bulletSpawnOffset);
-
-        // Instantiate the bullet
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-
-        // Set bullet direction
-        Vector2 bulletDirection = (playerTransform.position - bulletSpawnPosition).normalized;
-        bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * 10f; // Set bullet speed
     }
+    
+    public virtual void Idle()
+    {
+
+    }   
 }

@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Flip()
+    public virtual void Flip()
     {
         Vector3 scale = transform.localScale;
         if (movementDirection < 0)
