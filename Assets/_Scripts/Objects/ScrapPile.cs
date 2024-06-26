@@ -66,7 +66,7 @@ public class ScrapPile : MonoBehaviour
     private void SpawnPowerUp()
     {
         // Calculate the position to spawn the power-up to the right side of the player
-        Vector3 spawnPosition = player.transform.position + new Vector3(spawnOffset, 0, 0);
+        Vector3 spawnPosition = transform.position + new Vector3(0, spawnOffset, 0);
 
         // Select a random power-up from the array
         int randomIndex = Random.Range(0, powerUpPrefabs.Length);
