@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 29069692782753144}
   - component: {fileID: 8109914209748032979}
   - component: {fileID: 3032768894147958744}
-  - component: {fileID: 111093696648103832}
+  - component: {fileID: 5703682671561697202}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -244,7 +244,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &111093696648103832
+--- !u!114 &5703682671561697202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,14 +253,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8581599989062961032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0883c54f70e7e51449a2dfe7c76952c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 246894bb29629f343b16191d2cbf4934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
   movementDirection: 0
-  approachSpeed: 3
-  detectionRadius: 10
-  stopDistance: 5
+  enemySpeed: 0
+  detectionRadius: 0
+  stopDistance: 0
+  attackRadius: 0
+  attackCooldown: 0
+  lastAttackTime: -Infinity
+  distanceToPlayer: 0
+  directionToPlayer: {x: 0, y: 0}
+  playerCharacter: {fileID: 0}
+  player: {fileID: 0}
+  playerTransform: {fileID: 0}
   bulletPrefab: {fileID: 8537250571008826557, guid: 232a700a2ddd1dc4bb94cec2bdbb27c8, type: 3}
-  shootCooldown: 2
   bulletSpawnOffset: 1

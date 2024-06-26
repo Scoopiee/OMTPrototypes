@@ -1,84 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class RangedEnemy : Character
+public class RangedEnemy : Enemy
 {
-    public float approachSpeed = 3f;
-    public float detectionRadius = 10f; // Radius within which the enemy detects the player
-    public float stopDistance = 2f; // Distance at which the enemy stops approaching the player
+    // Start is called before the first frame update
     public GameObject bulletPrefab; // Reference to the bullet prefab
-    public float shootCooldown = 2f; // Time between shots
-    public float bulletSpawnOffset = 1f; // Distance in front of the enemy to spawn bullet
-    [SerializeField] float distanceToPlayer;
-    [SerializeField] Vector2 direction;
-
-
-    private Transform playerTransform;
-    private float lastShotTime;
-    private Player player;
-
-    void Start()
+    public float bulletSpawnOffset = 1f; 
+    void Awake()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        player = playerTransform.GetComponent<Player>();
-        lastShotTime = -shootCooldown; // Allow shooting immediately on start
+        enemySpeed = 3f;
+        detectionRadius = 10f;
+        stopDistance = 4.9f;
+        attackRadius = 5f;
+        attackCooldown = 1f;
+
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        if (playerCharacter != null)
+        {
+            playerTransform = playerCharacter.transform;
+            player = playerCharacter.GetComponent<Player>();
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found with tag 'Player'");
+        }
     }
 
+    public override void Attack()
+    {
+        if (Time.time - lastAttackTime >= attackCooldown) // Check if the attack is within cooldown period
+        {
+            if (distanceToPlayer < attackRadius)
+            {
+                lastAttackTime = Time.time;
+                // Calculate bullet spawn position with offset
+                Vector3 bulletSpawnPosition = transform.position + (Vector3.right * movementDirection * bulletSpawnOffset);
+
+                // Instantiate the bullet
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+
+                //Bullet rotation
+                Vector3 rotation = playerTransform.position - bulletSpawnPosition;
+                float rotZ = Mathf.Atan2(rotation.y * movementDirection, rotation.x * movementDirection) * Mathf.Rad2Deg; 
+                bullet.transform.rotation = Quaternion.Euler(0,0, rotZ);
+                
+                // Set bullet direction
+                Vector2 bulletDirection = (playerTransform.position - bulletSpawnPosition).normalized;
+                bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * 10f; // Set bullet speed
+            }
+        }
+    }
+    // Update is called once per frame
     void Update()
     {
-        ApproachAndShootPlayer();
-    }
-
-    private void ApproachAndShootPlayer()
-    {
-        if (playerTransform == null || player.GetInvisibilityStatus())
-        {
-            return; // Do not approach or target the player if they are invisible
-        }
-
-            distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer < detectionRadius)
-        {
-            direction = (playerTransform.position - transform.position).normalized;
-
-            // Move towards the player if outside the stop distance
-            if (distanceToPlayer > stopDistance)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, approachSpeed * Time.deltaTime);
-            }
-
-            // Update movementDirection for flipping
-            if (direction.x > 0)
-            {
-                movementDirection = 1;
-            }
-            else if (direction.x < 0)
-            {
-                movementDirection = -1;
-            }
-            Flip();
-
-            // Shoot at the player if within detection radius
-            ShootAtPlayer(direction);
-        }
-    }
-    private void ShootAtPlayer(Vector2 direction)
-    {
-        if (Time.time - lastShotTime < shootCooldown)
-        {
-            return;
-        }
-
-        lastShotTime = Time.time;
-
-        // Calculate bullet spawn position with offset
-        Vector3 bulletSpawnPosition = transform.position + (Vector3.right * movementDirection * bulletSpawnOffset);
-
-        // Instantiate the bullet
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-
-        // Set bullet direction
-        Vector2 bulletDirection = (playerTransform.position - bulletSpawnPosition).normalized;
-        bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * 10f; // Set bullet speed
+        FindPlayer();
+        ApproachPlayer();
+        Attack();
     }
 }

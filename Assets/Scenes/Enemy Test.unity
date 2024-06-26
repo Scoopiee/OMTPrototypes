@@ -246,11 +246,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1582920061234029421, guid: 7dd7c07da610579449bf491e68d98fb7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.54
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 1582920061234029421, guid: 7dd7c07da610579449bf491e68d98fb7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.32
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 1582920061234029421, guid: 7dd7c07da610579449bf491e68d98fb7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -407,7 +407,64 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e752ddfdd64a4b438efd0645b48b439, type: 3}
---- !u!1001 &1390422385
+--- !u!1001 &623326969
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 785053852967202867, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_Name
+      value: MeleeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.1795025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.502799
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386332752213820579, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ff9149c64f63824abab9769cfc1aa30, type: 3}
+--- !u!1001 &2130224464
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -417,11 +474,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2891655875779742253, guid: 3c96218053c04ff4a8d20b5b16b4940b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.979784
+      value: 11.964866
       objectReference: {fileID: 0}
     - target: {fileID: 2891655875779742253, guid: 3c96218053c04ff4a8d20b5b16b4940b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9356327
+      value: -3.5973263
       objectReference: {fileID: 0}
     - target: {fileID: 2891655875779742253, guid: 3c96218053c04ff4a8d20b5b16b4940b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -457,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8581599989062961032, guid: 3c96218053c04ff4a8d20b5b16b4940b, type: 3}
       propertyPath: m_Name
-      value: NEWRangedEnemy
+      value: RangedEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -655,4 +712,5 @@ SceneRoots:
   - {fileID: 91349402}
   - {fileID: 74958863}
   - {fileID: 219469807}
-  - {fileID: 1390422385}
+  - {fileID: 2130224464}
+  - {fileID: 623326969}
