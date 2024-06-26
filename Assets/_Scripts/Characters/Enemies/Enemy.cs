@@ -9,8 +9,7 @@ public class Enemy : Character
     public float stopDistance;
     public float attackRadius;
     public float attackCooldown;
-    private float lastAttackTime = -Mathf.Infinity; // Time when the last attack occurred
-
+    public float lastAttackTime = -Mathf.Infinity; // Time when the last attack occurred
     public float distanceToPlayer;
     public Vector2 directionToPlayer;
     public GameObject playerCharacter;
