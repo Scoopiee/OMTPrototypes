@@ -1,14 +1,23 @@
+/**************************************************************************************************************
+* <Melee Enemy> Class
+*
+* Contains logic for basic enemy behaviours, extending the enemy class.
+*
+* Was just a test enemy for while I implemented new class structure but works great as a basic melee enemy
+*
+* Created by: <Aidan McCarthy> 
+* Date: <25/06/2024>
+*
+***************************************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
-     // Radius within which the enemy detects the player
-    
-    // Start is called before the first frame update
     void Awake()
     {
+        // Set common variables TODO: This in a better way if possible
         enemySpeed = 3f;
         detectionRadius = 10f;
         stopDistance = 1.9f;
@@ -28,7 +37,6 @@ public class MeleeEnemy : Enemy
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindPlayer();

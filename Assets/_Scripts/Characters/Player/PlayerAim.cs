@@ -1,3 +1,13 @@
+/**************************************************************************************************************
+* <Player Aim> Class
+*
+* Rotates a child object on the player 'rotation point' to show an aim widget useful for
+* determining where a throw will be. 
+* 
+* Created by: <Aidan McCarthy> 
+* Date: <11/06/2024>
+*
+***************************************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

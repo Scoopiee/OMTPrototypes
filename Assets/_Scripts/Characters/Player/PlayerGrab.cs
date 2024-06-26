@@ -1,3 +1,12 @@
+/**************************************************************************************************************
+* <Player Grab> Class
+*
+* This class just contains logic for the player grabbing objects
+* TODO: This is all a mess that needs reorganising
+* Created by: <Aidan McCarthy> 
+* Date: <11/06/2024>
+*
+***************************************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,33 +36,36 @@ public class GrabObjects : MonoBehaviour
         
         int playerDirection = player.movementDirection;
         
-        RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, Vector2.right * playerDirection, rayDistance);
+        RaycastHit2D hitInfo = Physics2D.Raycast(rayPoint.position, Vector2.right * playerDirection, rayDistance); // Ray to scan for objects in front of player
+
 
         if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == layerIndex)
         {
             if (Input.GetKeyDown(KeyCode.E) && grabbedObject == null)
             {
-                grabbedObject = hitInfo.collider.gameObject;
-                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
-                grabbedObject.transform.position = grabPoint.position;
-                grabbedObject.transform.SetParent(transform);
+                grabbedObject = hitInfo.collider.gameObject; // Checks what has been grabbed
+                grabbedObject.GetComponent<Rigidbody2D>().isKinematic = true; 
+                grabbedObject.transform.position = grabPoint.position; // Places the object at the grab point of the player
+                grabbedObject.transform.SetParent(transform); // Makes the object a child of the player character TODO:
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F)) //Logic to drop object
         {
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            grabbedObject.transform.SetParent(null);
+            grabbedObject.transform.SetParent(null); //
+            
             grabbedObject = null;
         }
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))//Logic to throw object
         {
             Rigidbody2D rb = grabbedObject.GetComponent<Rigidbody2D>();
+            
             grabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
             grabbedObject.transform.SetParent(null);
- 
-            // Apply force to throw the object
+
+            //Applying force to the object in the direction of the mouse cursor 
             Vector2 throwDirection = new Vector2(mousePos.x - grabPoint.transform.position.x, mousePos.y - grabPoint.transform.position.y).normalized; // Adjust as needed for desired throw angle
             float throwForce = 20f; // Adjust the force value as needed
             rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);

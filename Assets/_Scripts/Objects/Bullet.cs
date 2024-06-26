@@ -1,3 +1,12 @@
+/**************************************************************************************************************
+* <Bullet> Class
+*
+* Contains logic for bullet object, such as damage, collision logic, and  
+*
+* Created by: <Full Name> 
+* Date: <dd/mm/yy>
+*
+***************************************************************************************************************/
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,28 +15,15 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"Collision detected with {collision.gameObject.name}");
-
         // Check if the collided object is the player
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player hit!");
-            Player player = collision.gameObject.GetComponent<Player>();
+            Player player = collision.gameObject.GetComponent<Player>(); // Assign player reference
             if (player != null)
             {
-                Debug.Log("Player component found");
-                // Apply damage to the player
                 player.TakeDamage(damage);
-                Debug.Log("Player took 20 damage");
-            }
-            else
-            {
-                Debug.Log("Player component not found");
             }
         }
-
-        Debug.Log("Bullet destroyed");
-        // Destroy the bullet on collision with any object
-        Destroy(gameObject);
+        Destroy(gameObject); // Destroy the bullet on collision with any object
     }
 }

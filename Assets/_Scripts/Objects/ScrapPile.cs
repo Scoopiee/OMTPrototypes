@@ -1,18 +1,31 @@
+/**************************************************************************************************************
+* <Scrap Pile> Class
+*
+* Contains logic for scrap piles such as collision, interaction logic, and drop tables
+*
+* Created by: <Aidan McCarthy> 
+* Date: <10/06/2024>
+*
+***************************************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrapPile : MonoBehaviour
 {
+    // Object and component references
     public GameObject player;
-    public GameObject powerUpPrefab; // Reference to the InvisibilityPowerUp prefab
-    public float shootForce = 3f;
+    public GameObject invisPowerUpPrefab; // Reference to the InvisibilityPowerUp prefab
     private Player playerScript;
-    private bool isPlayerBehind = false;
+    // Powerup spawning variables 
+    public float shootForce = 3f;
     public float spawnOffset = 1f; // Offset distance from the player to spawn the power-up
+    // Other variables
+    private bool isPlayerBehind = false;
 
     void Start()
     {
+        // Assign player references
         player = GameObject.FindWithTag("Player");
         if (player != null)
         {
@@ -22,6 +35,7 @@ public class ScrapPile : MonoBehaviour
 
     void Update()
     {
+        // Handle interaction logic 
         if (Input.GetKeyDown(KeyCode.E) && isPlayerBehind)
         {
             SpawnPowerUp();
@@ -29,6 +43,7 @@ public class ScrapPile : MonoBehaviour
         }
     }
 
+    // Scrap pile hide logic 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -47,12 +62,13 @@ public class ScrapPile : MonoBehaviour
         }
     }
 
+    // Logic for spawning a powerup. TODO: Add loot table
     private void SpawnPowerUp()
     {
         // Calculate the position to spawn the power-up to the right side of the player
         Vector3 spawnPosition = player.transform.position + new Vector3(spawnOffset, 0, 0);
 
-        GameObject powerUp = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+        GameObject powerUp = Instantiate(invisPowerUpPrefab, spawnPosition, Quaternion.identity);
         Rigidbody2D powerUpRb = powerUp.GetComponent<Rigidbody2D>();
         powerUpRb.AddForce(transform.up * shootForce, ForceMode2D.Impulse);
     }

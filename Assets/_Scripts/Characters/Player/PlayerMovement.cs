@@ -1,3 +1,13 @@
+/**************************************************************************************************************
+* <Player Movement> Class
+*
+* Handles input and contains logic for moving the player character and certain movement abilities
+* such as the dash
+*
+* Created by: <Aidan McCarthy> 
+* Date: <10/06/24>
+*
+***************************************************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,10 +35,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask objectsLayer;
     [SerializeField] private Player player;
 
-    // Update is called once per frame
     void Update()
     {
-       if (isDashing)
+       if (isDashing) // Dont run if dashing
        {
         return;
        }
@@ -39,22 +48,23 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    private void FixedUpdate() // Fixed interval updates for physics calculations
+    private void FixedUpdate()
     {
-        if (isDashing)
+        if (isDashing) // Dont run if dashing
         {
             return;
         }
         
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y); //Left Right Movement
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y); // Left Right Movement
     }
     
+    // Checking if the player character is grounded
     private bool IsGrounded()
     {
         LayerMask combinedLayerMask = groundLayer | objectsLayer; // Combines the ground and objects layers to a single layermask to be checked.
         return Physics2D.OverlapCircle(groundCheck.position, checkRadius, combinedLayerMask);
     }
-    
+    // Handles input and contains jump logic     
     void GetInput()
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
@@ -72,7 +82,8 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
        }
     }
-    void SetDirection() //Sets the player.movement variable depending on where
+    // Sets the player movement field depending on the horizontal value and flips character sprite accordingly
+    void SetDirection() 
     {
         horizontal = Input.GetAxis("Horizontal"); //Returns value of -1,- +1, depending on direction moving.
         
@@ -86,14 +97,22 @@ public class PlayerMovement : MonoBehaviour
         }
         player.Flip();
     }
+    // Dash logic
     private IEnumerator Dash()
     {
+        // Verifies dash
         canDash = false;
         isDashing = true;
+        
+        // Briefly remove gravity from player
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        
+        // The dash!
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
+        
+        // Return back to normal
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);

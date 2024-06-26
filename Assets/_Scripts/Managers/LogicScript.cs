@@ -1,3 +1,14 @@
+/**************************************************************************************************************
+* <Logic Script> Class
+*
+* Logic manager that will update the UI with information such as collected items, health, 
+* active powerup and duration etc.
+* TODO: Add checks for null references and create powerup UI
+* Created by: <Aidan McCarthy> 
+* Date: <12/06/2024>
+*
+***************************************************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +16,16 @@ using UnityEngine.UI;
 
 public class LogicScript : MonoBehaviour
 {
+    //UI References 
     public Text healthText;
+    
+    //Player Reference
     private Player player;
-    // Start is called before the first frame update
+    
     void Start()
     {
         healthText = GameObject.Find("HealthText").GetComponent<Text>();
-
         player = FindObjectOfType<Player>();
-        if (player != null)
-        {
-            Debug.Log($"Found player script, {player}");
-        }
-        else
-        {
-            Debug.Log("Couldn't find Player script");
-        }
     }
 
     void Update()
@@ -28,6 +33,7 @@ public class LogicScript : MonoBehaviour
        UpdateHealthUI(player.health);
     }
     
+    //Update the health UI with current player health 
     public void UpdateHealthUI(int health)
     {
        if (healthText != null)
