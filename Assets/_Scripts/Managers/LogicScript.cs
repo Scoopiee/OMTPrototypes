@@ -18,6 +18,7 @@ public class LogicScript : MonoBehaviour
 {
     //UI References 
     public Text healthText;
+    public Text powerupText;
     
     //Player Reference
     private Player player;
@@ -25,12 +26,14 @@ public class LogicScript : MonoBehaviour
     void Start()
     {
         healthText = GameObject.Find("HealthText").GetComponent<Text>();
+        powerupText = GameObject.Find("PowerupText").GetComponent<Text>();
         player = FindObjectOfType<Player>();
     }
 
     void Update()
     {
        UpdateHealthUI(player.health);
+       UpdatePowerupUI();
     }
     
     //Update the health UI with current player health 
@@ -40,6 +43,13 @@ public class LogicScript : MonoBehaviour
         {
             healthText.text = $"Health: {health}";
         }
+    }
+     public void UpdatePowerupUI()
+    {
+       if (player.ActivePowerup != null)
+       {
+            powerupText.text = player.ActivePowerup;
+       }
     }
 
 }

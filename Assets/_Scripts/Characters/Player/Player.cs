@@ -16,6 +16,9 @@ public class Player : Character
 {
     private SpriteRenderer spriteRenderer;
     private bool isInvisible = false;
+    public float speed = 8f;
+    public float jumpHeight = 16f;
+    public string ActivePowerup = "";
    
     // Set health and grab relevant components
     void Awake()

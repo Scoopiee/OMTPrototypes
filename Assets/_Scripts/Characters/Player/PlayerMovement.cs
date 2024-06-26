@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 {
     //Player movement variables
     private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float speed;
+    private float jumpingPower;
     private float checkRadius = 0.3f;
 
     //Dashing variables
@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+       speed = player.speed;
+       jumpingPower = player.jumpHeight;
        if (isDashing) // Dont run if dashing
        {
         return;

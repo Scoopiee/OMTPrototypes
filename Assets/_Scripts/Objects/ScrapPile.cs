@@ -15,7 +15,7 @@ public class ScrapPile : MonoBehaviour
 {
     // Object and component references
     public GameObject player;
-    public GameObject invisPowerUpPrefab; // Reference to the InvisibilityPowerUp prefab
+    public GameObject[] powerUpPrefabs; // Reference to the InvisibilityPowerUp prefab
     private Player playerScript;
     // Powerup spawning variables 
     public float shootForce = 3f;
@@ -68,7 +68,11 @@ public class ScrapPile : MonoBehaviour
         // Calculate the position to spawn the power-up to the right side of the player
         Vector3 spawnPosition = player.transform.position + new Vector3(spawnOffset, 0, 0);
 
-        GameObject powerUp = Instantiate(invisPowerUpPrefab, spawnPosition, Quaternion.identity);
+        // Select a random power-up from the array
+        int randomIndex = Random.Range(0, powerUpPrefabs.Length);
+        GameObject selectedPowerUpPrefab = powerUpPrefabs[randomIndex];
+
+        GameObject powerUp = Instantiate(selectedPowerUpPrefab, spawnPosition, Quaternion.identity);
         Rigidbody2D powerUpRb = powerUp.GetComponent<Rigidbody2D>();
         powerUpRb.AddForce(transform.up * shootForce, ForceMode2D.Impulse);
     }
